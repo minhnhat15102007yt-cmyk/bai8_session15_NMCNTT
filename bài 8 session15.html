@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bài 8 session15</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h3 id="phần-1-phân-tích-lỗ-hổng">Phần 1: Phân tích lỗ hổng</h3>
+<ol>
+<li>
+<p><strong>Nguồn gốc rò rỉ:</strong> Dòng 1 (<code>campuspay_beta_users.xlsx</code> - <strong>Editor + Anyone with the link</strong>). Sự kết hợp này biến file chứa thông tin nhạy cảm thành tài nguyên công khai ai cũng tải hoặc sửa được.</p>
+</li>
+<li>
+<p><strong>3 giả thuyết người lạ đọc được file <code>campuspay_api_keys.txt</code> (dù để Restricted):</strong></p>
+<ul>
+<li>
+<p>Thư mục cha chứa file bị để chế độ công khai.</p>
+</li>
+<li>
+<p>Email B được cấp quyền đã để lộ file hoặc chia sẻ lại cho người lạ.</p>
+</li>
+<li>
+<p>File từng bị đổi quyền công khai ở thời điểm khác không nằm trong log.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="phần-2-sửa-lỗi--nghiệm-thu">Phần 2: Sửa lỗi &amp; Nghiệm thu</h3>
+<ol start="3">
+<li>
+<p><strong>Bảng cấu hình quyền chuẩn:</strong></p>
+<ul>
+<li>
+<p><strong>campuspay_beta_users.xlsx:</strong>  <strong>Viewer + Restricted</strong> (Bảo vệ thông tin cá nhân).</p>
+</li>
+<li>
+<p><strong>campuspay_api_keys.txt:</strong>  <strong>Viewer + Restricted</strong> (Giới hạn tuyệt đối cho dev cốt lõi).</p>
+</li>
+<li>
+<p><strong>slide_pitch_v8.pptx:</strong>  <strong>Commenter/Viewer + Anyone with the link</strong> (Slide thuyết trình cần độ mở để góp ý).</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Thu hồi quyền &amp; Expiration Date:</strong></p>
+<ul>
+<li>
+<p><strong>Vô hiệu hóa nhanh:</strong> Chuyển phạm vi từ <em>Anyone with the link</em> về <em>Restricted</em> để bẻ gãy mọi link cũ đang bị phát tán.</p>
+</li>
+<li>
+<p><strong>Dùng ‘Set Expiration Date’ khi:</strong> Chia sẻ tài liệu theo sự kiện hoặc thời hạn ngắn (như test code 3 ngày), giúp hệ thống tự động xóa quyền, tránh việc quên thu hồi thủ công.</p>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</body>
+
+</html>
